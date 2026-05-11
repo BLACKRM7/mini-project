@@ -13,18 +13,21 @@ return new class extends Migration
     {
         Schema::create('pcs', function (Blueprint $table) {
             $table->id();
-            
-            $table->code('code')->unique();
-            $table->name('name');
-            $table->ipAddress('ip_address')->nullable();
-            $table->location('location')->nullable();
-            $table->status('status', [
-                'active',
-                'inactive',
-                'maintenance',
-                'borrowed'
-            ])->default('inactive');
-            $table->timestamps('last_seen_at')->nullable();
+            $table->foreignId('room_id')->constrained()->onDelete('cascade');
+
+            $table->string('pc_code')->unique();
+            $table->string('pc_name');
+
+            $table->string('processor')->nullable();
+            $table->string('ram')->nullable();
+            $table->string('storage')->nullable();
+
+            $table->enum('status', [
+                'available',
+                'borrowed',
+                'maintenance'
+            ])->default('available');
+
             $table->timestamps();
         });
     }

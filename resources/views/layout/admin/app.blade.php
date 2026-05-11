@@ -33,16 +33,16 @@
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
       <!-- navbar -->
-      @include('layout.navbar')
+      @include('layout.admin.navbar')
       <!-- end navbar -->
       <!-- sidebar -->
-      @include('layout.sidebar')
+      @include('layout.admin.sidebar')
       <!-- endside bar -->
       <!-- Main Content -->
       @yield('content')
       <!-- end content -->
       <!-- footer -->
-      @include('layout.footer')
+      @include('layout.admin.footer')
       <!-- endfooter -->
     </div>
   </div>

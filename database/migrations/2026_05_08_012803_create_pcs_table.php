@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pcs', function (Blueprint $table) {
             $table->id();
+            
             $table->code('code')->unique();
             $table->name('name');
             $table->ipAddress('ip_address')->nullable();

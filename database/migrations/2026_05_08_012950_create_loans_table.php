@@ -12,18 +12,24 @@ return new class extends Migration {
     {
         Schema::create('loan', function (Blueprint $table) {
             $table->id();
-            $table->user_id();
-            $table->pc_id();
-            $table->borrowed_at();
-            $table->returned_at();
-            $table->status();
+            
+            $table->foreignId('user_id')
+            ->constrained()
+            ->cascadeOnDelete();
+            
+            $table->foreignId('pc_id')
+            ->constrained()
+            ->cascadeOnDelete();
+            
+            $table->timestamp('borrowed_at');
+            $table->timestamp('returned_at')->nullable();
+            
             $table->enum('status', [
-                'active',
-                'inactive',
-                'maintenance',
-                'borrowed'
-            ])->default('inactive');
-            $table->timestamps('last_seen_at')->nullable
+                'borrowed',
+                'returned',
+                'overdue',
+            ])->default('borrowing');
+            $table->timestamps();
         });
     }
 

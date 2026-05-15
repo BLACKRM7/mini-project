@@ -9,6 +9,8 @@ class PC extends Model
 {
     use HasFactory;
 
+    protected $table = 'pcs';
+
     protected $fillable = [
         'room_id',
         'pc_code',

@@ -3,7 +3,7 @@
 @section('content')
 <div class="main-content">
     <section class="section">
-        <div class="section-header">
+        <div class="section-header" style="text-align: center;">
             <h1>Admin Dashboard</h1>
         </div>
 
@@ -236,34 +236,6 @@
                                         </div>
                                     </div>
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Account Info -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="text-center mb-3">
-                                <div class="avatar avatar-xl mb-3 rounded-circle border border-danger">
-                                    <span class="avatar-initials rounded-circle bg-danger text-white">
-                                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                                    </span>
-                                </div>
-                                <h4>{{ auth()->user()->name }}</h4>
-                                <p class="text-muted small">ADMIN</p>
-                                <p class="text-muted small">{{ auth()->user()->email }}</p>
-                            </div>
-                            <hr />
-                            <div class="text-center">
-                                <a href="#" class="btn btn-sm btn-outline-primary w-100 mb-2">
-                                    Edit Profil
-                                </a>
-                                <form action="{{ route('logout') }}" method="POST" style="margin-top: 5px;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-outline-danger w-100">
-                                        Logout
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>

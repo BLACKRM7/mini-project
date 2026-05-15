@@ -187,12 +187,9 @@
                                 <a href="#" class="btn btn-sm btn-outline-primary w-100 mb-2">
                                     Edit Profil
                                 </a>
-                                <form action="{{ route('logout') }}" method="POST" style="margin-top: -45px;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-outline-danger w-100 mt-2" style="margin-top: 10px;">
-                                        Logout
-                                    </button>
-                                </form>
+                                <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-danger w-100 mt-2" style="margin-top: 10px;">
+                                    Logout
+                                </a>
                             </div>
                         </div>
                     </div>

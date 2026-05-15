@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UsersController extends Controller
@@ -32,13 +33,17 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'email' => 'required|email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'role' => 'required|in:admin,user',
         ]);
 
         User::create([
-            'nama' => $request->nama,
+            'name' => $request->name,
             'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
 
         return redirect()
@@ -62,16 +67,25 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'email' => 'required|email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8',
+            'role' => 'required|in:admin,user',
         ]);
 
         $user = User::findOrFail($id);
 
-        $user->update([
-            'nama' => $request->nama,
+        $data = [
+            'name' => $request->name,
             'email' => $request->email,
-        ]);
+            'role' => $request->role,
+        ];
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
 
         return redirect()
             ->route('users.index')
@@ -86,7 +100,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         $user->delete();
-
+ 
         return redirect()
             ->route('users.index')
             ->with('success', 'Data user berhasil dihapus');

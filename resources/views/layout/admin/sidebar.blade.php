@@ -51,12 +51,9 @@
       </li>
 
       <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-        <form action="{{ route('logout') }}" method="POST">
-          @csrf
-          <button type="submit" class="btn btn-danger btn-lg btn-block btn-icon-split">
-            <i class="fas fa-sign-out-alt"></i> Logout
-          </button>
-        </form>
+        <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-danger w-100" style="margin-top: 5px; text-decoration: none; display: inline-block; text-align: center;">
+          Logout
+        </a>
       </div>
     </ul>
   </aside>

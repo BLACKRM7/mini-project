@@ -13,62 +13,47 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>List Anggota</h4>
-                                <a href="{{ route('users.create') }}" class="btn btn-primary">Anggota</a>
+                                <a href="{{ url('admin/users/create') }}" class="btn btn-primary">Tambah Anggota</a>
                             </div>
                             <div class="card-body">
+                                @if(session('success'))
+                                    <div class="alert alert-success">{{ session('success') }}</div>
+                                @endif
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-md">
                                         <tr>
                                             <th>ID</th>
                                             <th>Nama</th>
                                             <th>Email</th>
-                                            <th>Email Verified At</th>
-                                            <th>Password</th>
                                             <th>Role</th>
-                                            <th>Remember Token</th>
                                             <th>Created At</th>
-                                            <th>Updated At</th>
+                                            <th>Aksi</th>
                                         </tr>
                                         @foreach($users as $user)
                                             <tr>
                                                 <td>{{ $user->id }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
-                                                <td>{{ $user->email_verified_at }}</td>
-                                                <td>{{ $user->password }}</td>
                                                 <td>{{ $user->role }}</td>
-                                                <td>{{ $user->remember_token }}</td>
-                                                <td>{{ $user->created_at }}</td>
-                                                <td>{{ $user->updated_at }}</td>
+                                                <td>{{ $user->created_at->format('d-m-Y H:i') }}</td>
+                                                <td>
+                                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin hapus?')">Hapus</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
-                                        @csrf
                                     </table>
                                 </div>
                             </div>
-                            </form>
-                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
-    </div>
-    </section>
+        </section>
     </div>
 
-    @push('js')
-        <script>
-            function handleDelete(id) {
-                $('#form-delete').attr('action', '/users/' + id);
-                var check = confirm('APakah anda yakin ingin menghapus data ini?');
-                if (check) {
-                    $('#form-delete').submit();
-                }
-            }
-            function handleEdit(id) {
-                window.location.href = "/users/" + id + "/edit/";
-            }
-        </script>
-    @endpush
 @endsection

@@ -22,7 +22,7 @@
                         </ul>
                     </div>
                     @endif
-                    <form action="{{ url('admin/pcs/'.$pc->id) }}" method="POST">
+                    <form action="{{ route('admin.pcs.update', $pc->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -103,6 +103,7 @@
                                         <option value="">Pilih Status...</option>
                                         <option value="available" {{ old('status', $pc->status) == 'available' ? 'selected' : '' }}>Available</option>
                                         <option value="unavailable" {{ old('status', $pc->status) == 'unavailable' ? 'selected' : '' }}>Unavailable</option>
+                                        <option value="maintenance" {{ old('status', $pc->status) == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
                                     </select>
                                     @error('status')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -110,7 +111,7 @@
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-between">
-                                <a href="{{ route('pcs.index') }}" class="btn btn-secondary">Kembali</a>
+                                <a href="{{ route('admin.pcs.index') }}" class="btn btn-secondary">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </div>

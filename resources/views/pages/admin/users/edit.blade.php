@@ -22,7 +22,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('admin/users/'.$user->id) }}" method="POST">
+                        <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                             @csrf()
                             @method('PUT')
 
@@ -75,8 +75,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-between">
-                                    <a href="{{ route('users.index') }}" class="btn btn-secondary">Kembali</a>
-                                    <button type="submit" class="btn btn-primary" href="{{ route('users.index') }}">Update</button>
+                                    <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Kembali</a>
+                                    <button type="submit" class="btn btn-primary" href="{{ route('admin.users.index') }}">Update</button>
                                 </div>
                             </div>
                         </form>

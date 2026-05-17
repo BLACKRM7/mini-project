@@ -1,74 +1,84 @@
 @extends('layout.admin.app')
-@section('title', 'Anggota')
+@section('title', 'Pengembalian')
 @section('content')
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Halaman Anggota</h1>
-            </div>
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <h1>Halaman Pengembalian</h1>
+        </div>
 
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12 col-md-12 col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>List Anggota</h4>
-                                <a href="{{ route('users.create') }}" class="btn btn-primary">Anggota</a>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-md">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>List Pengembalian</h4>
+                        </div>
+                        <div class="card-body">
+                            @if(session('success'))
+                                <div class="alert alert-success">{{ session('success') }}</div>
+                            @endif
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-md">
+                                    <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Nama</th>
-                                            <th>Email</th>
-                                            <th>Email Verified At</th>
-                                            <th>Password</th>
-                                            <th>Role</th>
-                                            <th>Remember Token</th>
-                                            <th>Created At</th>
-                                            <th>Updated At</th>
+                                            <th>#</th>
+                                            <th>Peminjam</th>
+                                            <th>PC</th>
+                                            <th>Ruangan</th>
+                                            <th>Dikembalikan Pada</th>
+                                            <th>Catatan Kondisi</th>
+                                            <th>Status Peminjaman</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                        @foreach($users as $user)
+                                    </thead>
+                                    <tbody>
+                                        @forelse($returns as $i => $return)
                                             <tr>
-                                                <td>{{ $user->id }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->email_verified_at }}</td>
-                                                <td>{{ $user->password }}</td>
-                                                <td>{{ $user->role }}</td>
-                                                <td>{{ $user->remember_token }}</td>
-                                                <td>{{ $user->created_at }}</td>
-                                                <td>{{ $user->updated_at }}</td>
+                                                <td>{{ $i + 1 }}</td>
+                                                <td>{{ $return->borrowing->user->name ?? '-' }}</td>
+                                                <td>{{ $return->borrowing->pc->pc_name ?? '-' }}</td>
+                                                <td>{{ $return->borrowing->pc->room->room_name ?? '-' }}</td>
+                                                <td>{{ $return->returned_at }}</td>
+                                                <td>{{ $return->condition_notes ?? '-' }}</td>
+                                                <td>
+                                                    @php
+                                                        $status = $return->borrowing->status ?? 'unknown';
+                                                        $badge = ['pending'=>'warning','approved'=>'success','returned'=>'info','rejected'=>'danger'][$status] ?? 'secondary';
+                                                    @endphp
+                                                    <span class="badge badge-{{ $badge }}">{{ ucfirst($status) }}</span>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('admin.returns.show', $return->id) }}" class="btn btn-sm btn-info">Detail</a>
+                                                    @if($return->borrowing->status === 'approved')
+                                                        <form action="{{ route('admin.returns.approve', $return->id) }}" method="POST" style="display:inline;">
+                                                            @csrf @method('PATCH')
+                                                            <button class="btn btn-sm btn-success" onclick="return confirm('Konfirmasi pengembalian?')">Konfirmasi</button>
+                                                        </form>
+                                                        <form action="{{ route('admin.returns.reject', $return->id) }}" method="POST" style="display:inline;">
+                                                            @csrf @method('PATCH')
+                                                            <button class="btn btn-sm btn-warning" onclick="return confirm('Tolak pengembalian?')">Tolak</button>
+                                                        </form>
+                                                    @endif
+                                                    <form action="{{ route('admin.returns.destroy', $return->id) }}" method="POST" style="display:inline;">
+                                                        @csrf @method('DELETE')
+                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus data?')">Hapus</button>
+                                                    </form>
+                                                </td>
                                             </tr>
-                                        @endforeach
-                                        @csrf
-                                    </table>
-                                </div>
+                                        @empty
+                                            <tr>
+                                                <td colspan="8" class="text-center">Belum ada data pengembalian.</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                             </div>
-                            </form>
-                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
-    </div>
+        </div>
     </section>
-    </div>
-
-    @push('js')
-        <script>
-            function handleDelete(id) {
-                $('#form-delete').attr('action', '/users/' + id);
-                var check = confirm('APakah anda yakin ingin menghapus data ini?');
-                if (check) {
-                    $('#form-delete').submit();
-                }
-            }
-            function handleEdit(id) {
-                window.location.href = "/users/" + id + "/edit/";
-            }
-        </script>
-    @endpush
+</div>
 @endsection

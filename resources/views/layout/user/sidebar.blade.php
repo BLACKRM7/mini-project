@@ -8,28 +8,28 @@
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
-      <li class="active">
+      <li class="{{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
         <a href="{{ route('user.dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
       </li>
 
       <li class="menu-header">Menu</li>
-      <li class="dropdown">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-laptop"></i> <span>PC</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="#">Daftar PC</a></li>
-          <li><a class="nav-link" href="#">Peminjaman Saya</a></li>
-          <li><a class="nav-link" href="#">Riwayat</a></li>
-        </ul>
+
+      <li class="{{ request()->routeIs('user.pcs.*') ? 'active' : '' }}">
+        <a href="{{ route('user.pcs.index') }}" class="nav-link"><i class="fas fa-laptop"></i> <span>PC Tersedia</span></a>
+      </li>
+
+      <li class="{{ request()->routeIs('user.borrowings.*') ? 'active' : '' }}">
+        <a href="{{ route('user.borrowings.index') }}" class="nav-link"><i class="fas fa-exchange-alt"></i> <span>Peminjaman Saya</span></a>
       </li>
 
       <li class="menu-header">Settings</li>
-      <li>
-        <a href="#" class="nav-link"><i class="fas fa-user"></i> <span>Profile</span></a>
+      <li class="{{ request()->routeIs('user.profile.*') ? 'active' : '' }}">
+        <a href="{{ route('user.profile.index') }}" class="nav-link"><i class="fas fa-user"></i> <span>Profil Saya</span></a>
       </li>
 
       <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-        <a href="{{ route('logout') }}" class="btn btn-primary btn-lg btn-block btn-icon-split">
-          <i class="fas fa-sign-out-alt"></i> Logout
+        <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-danger w-100" style="margin-top: 5px; text-decoration: none; display: inline-block; text-align: center;">
+          Logout
         </a>
       </div>
     </ul>

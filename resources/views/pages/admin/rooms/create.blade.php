@@ -22,7 +22,7 @@
                         </ul>
                     </div>
                     @endif
-                    <form action="{{ url('admin/rooms') }}" method="POST">
+                    <form action="{{ route('admin.rooms.store') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -61,9 +61,11 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <a href="{{ route('admin.rooms.index') }}" class="btn btn-secondary">Batal</a>
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+                            </div>
 
-                            <a href="{{ route('rooms.index') }}" class="btn btn-secondary">Batal</a>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
                 </div>
                 </form>

@@ -87,16 +87,6 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <div class="card border-warning">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <i class="fas fa-history"></i> Riwayat
-                                            </h5>
-                                            <p class="card-text small">Lihat riwayat peminjaman dan pengembalian</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
                                     <div class="card border-secondary">
                                         <div class="card-body">
                                             <h5 class="card-title">
@@ -123,7 +113,7 @@
                                 <div class="col col-stats ms-3 ms-xl-0">
                                     <div class="numbers">
                                         <p class="state text-truncate text-secondary text-white-80">Total Peminjaman</p>
-                                        <h3 class="counter text-white">0</h3>
+                                        <h3 class="counter text-white">{{ \App\Models\Borrowing::where('user_id', auth()->id())->count() }}</h3>
                                     </div>
                                 </div>
                                 <div class="col col-stats text-white text-end">
@@ -142,7 +132,7 @@
                         </div>
                         <div class="card-body">
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action">
+                                <a href="{{ route('user.pcs.index') }}" class="list-group-item list-group-item-action">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
                                             <p class="mb-0"><strong>Daftar PC</strong></p>
@@ -150,7 +140,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action">
+                                <a href="{{ route('user.borrowings.index') }}" class="list-group-item list-group-item-action">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
                                             <p class="mb-0"><strong>Peminjaman Aktif</strong></p>
@@ -158,37 +148,6 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex">
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0"><strong>Riwayat Aktivitas</strong></p>
-                                            <small class="text-muted">Aktivitas yang telah dilakukan</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Account Info -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="text-center mb-3">
-                                <div class="avatar avatar-xl mb-3 rounded-circle border">
-                                    <span class="avatar-initials rounded-circle bg-primary text-white">
-                                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                                    </span>
-                                </div>
-                                <h4>{{ auth()->user()->name }}</h4>
-                                <p class="text-muted small">{{ auth()->user()->email }}</p>
-                            </div>
-                            <hr />
-                            <div class="text-center">
-                                <a href="#" class="btn btn-sm btn-outline-primary w-100 mb-2">
-                                    Edit Profil
-                                </a>
-                                <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-danger w-100 mt-2" style="margin-top: 10px;">
-                                    Logout
                                 </a>
                             </div>
                         </div>

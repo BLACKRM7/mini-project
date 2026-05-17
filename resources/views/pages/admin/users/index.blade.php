@@ -13,7 +13,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>List Anggota</h4>
-                                <a href="{{ url('admin/users/create') }}" class="btn btn-primary">Tambah Anggota</a>
+                                <a href="{{ route('admin.users.create') }}" class="btn btn-primary">Tambah Anggota</a>
                             </div>
                             <div class="card-body">
                                 @if(session('success'))
@@ -37,8 +37,8 @@
                                                 <td>{{ $user->role }}</td>
                                                 <td>{{ $user->created_at->format('d-m-Y H:i') }}</td>
                                                 <td>
-                                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin hapus?')">Hapus</button>

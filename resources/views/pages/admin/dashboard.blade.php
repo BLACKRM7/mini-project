@@ -73,7 +73,7 @@
                                                 <i class="fas fa-users"></i> Manajemen User
                                             </h5>
                                             <p class="card-text small">Kelola user, admin, dan permission</p>
-                                            <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary">Buka</a>
+                                            <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-primary">Buka</a>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +212,7 @@
                         </div>
                         <div class="card-body">
                             <div class="list-group list-group-flush">
-                                <a href="{{ route('users.index') }}" class="list-group-item list-group-item-action">
+                                <a href="{{ route('admin.users.index') }}" class="list-group-item list-group-item-action">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
                                             <p class="mb-0"><strong>Kelola User</strong></p>

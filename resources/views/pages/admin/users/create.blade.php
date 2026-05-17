@@ -22,7 +22,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('admin/users') }}" method="POST">
+                        <form action="{{ route('admin.users.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <a href="{{ route('users.index') }}" class="btn btn-secondary">Batal</a>
+                                    <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Batal</a>
                                     <button type="submit" class="btn btn-primary">Tambah</button>
                                 </div>
                             </div>

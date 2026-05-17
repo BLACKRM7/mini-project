@@ -35,8 +35,8 @@
                                                 <td>{{ $room->location }}</td>
                                                 <td>{{ $room->status }}</td>
                                                 <td>
-                                                    <a href="{{ route('rooms.edit', $room->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                    <form action="{{ route('rooms.destroy', $room->id) }}" method="POST" style="display:inline;">
+                                                    <a href="{{ route('admin.rooms.edit', $room->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                    <form action="{{ route('admin.rooms.destroy', $room->id) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin hapus?')">Hapus</button>

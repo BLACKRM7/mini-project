@@ -40,7 +40,7 @@ class PcsController extends Controller
             'processor' => 'required|string|max:255',
             'ram' => 'required|string|max:255',
             'storage' => 'required|string|max:255',
-            'status' => 'required|in:available,unavailable',
+            'status' => 'required|in:available,unavailable,maintenance',
         ]);
 
         PC::create([
@@ -54,7 +54,7 @@ class PcsController extends Controller
         ]);
 
         return redirect()
-            ->route('pcs.index')
+            ->route('admin.pcs.index')
             ->with('success', 'Data PC berhasil ditambahkan');
     }
 
@@ -81,7 +81,7 @@ class PcsController extends Controller
             'processor' => 'required|string|max:255',
             'ram' => 'required|string|max:255',
             'storage' => 'required|string|max:255',
-            'status' => 'required|in:available,unavailable',
+            'status' => 'required|in:available,unavailable,maintenance',
         ]);
 
         $pc = PC::findOrFail($id);
@@ -96,7 +96,7 @@ class PcsController extends Controller
         ]);
 
         return redirect()
-            ->route('pcs.index')
+            ->route('admin.pcs.index')
             ->with('success', 'Data PC berhasil diupdate');
     }
 
@@ -109,7 +109,7 @@ class PcsController extends Controller
         $pc->delete();
 
         return redirect()
-            ->route('pcs.index')
+            ->route('admin.pcs.index')
             ->with('success', 'Data PC berhasil dihapus');
     }
 }

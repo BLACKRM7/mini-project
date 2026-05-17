@@ -13,7 +13,6 @@ class PC extends Model
 
     protected $fillable = [
         'room_id',
-        'id',
         'pc_code',
         'pc_name',
         'processor',

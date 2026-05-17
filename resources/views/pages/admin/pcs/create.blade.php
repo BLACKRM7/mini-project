@@ -22,7 +22,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('admin/pcs') }}" method="POST">
+                        <form action="{{ route('admin.pcs.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -102,6 +102,7 @@
                                             <option value="">Pilih Status...</option>
                                             <option value="available" {{ old('status') == 'available' ? 'selected' : '' }}>Available</option>
                                             <option value="unavailable" {{ old('status') == 'unavailable' ? 'selected' : '' }}>unavailable</option>
+                                            <option value="maintenance" {{ old('status') == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
                                         </select>
                                         @error('status')
                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -109,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <a href="{{ route('pcs.index') }}" class="btn btn-secondary">Batal</a>
+                                    <a href="{{ route('admin.pcs.index') }}" class="btn btn-secondary">Batal</a>
                                     <button type="submit" class="btn btn-primary">Tambah</button>
                                 </div>
                             </div>

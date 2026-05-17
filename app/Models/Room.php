@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PC;
 
 class Room extends Model
 {
@@ -12,6 +13,7 @@ class Room extends Model
     protected $fillable = [
         'room_name',
         'location',
+        'status',
     ];
 
     // Relasi ke PC

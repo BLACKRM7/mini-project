@@ -24,16 +24,16 @@
       <li class="dropdown">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-laptop"></i> <span>PC</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="#">Daftar PC</a></li>
-          <li><a class="nav-link" href="#">Tambah PC</a></li>
+          <li><a class="nav-link" href="{{ route('pcs.index') }}">Daftar PC</a></li>
+          <li><a class="nav-link" href="{{ route('pcs.create') }}">Tambah PC</a></li>
         </ul>
       </li>
 
       <li class="dropdown">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-building"></i> <span>Ruangan</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="#">Daftar Ruangan</a></li>
-          <li><a class="nav-link" href="#">Tambah Ruangan</a></li>
+          <li><a class="nav-link" href="{{ route('rooms.index') }}">Daftar Ruangan</a></li>
+          <li><a class="nav-link" href="{{ route('rooms.create') }}">Tambah Ruangan</a></li>
         </ul>
       </li>
 

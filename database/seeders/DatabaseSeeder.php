@@ -1,8 +1,9 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\User;
+use Database\Seeders\RoomsSeeder;
+use Database\Seeders\PcsSeeder;
+use Database\Seeders\UserSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,8 @@ class DatabaseSeeder extends Seeder
         // Jalankan UserSeeder untuk membuat akun admin dan user
         $this->call([
             UserSeeder::class,
+            RoomsSeeder::class,
+            PcsSeeder::class,
         ]);
     }
 }

@@ -8,6 +8,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UsersController;
 
+use App\Http\Controllers\Admin\PcsController;
+use App\Http\Controllers\Admin\RoomsController;
+
 /*
 |--------------------------------------------------------------------------
 | Public Routes
@@ -95,7 +98,13 @@ Route::prefix('admin')
         // Users Management
         Route::resource('users', UsersController::class);
 
-});
+        // PCs Management
+        Route::resource('pcs', PcsController::class);
+
+        // Rooms Management
+        Route::resource('rooms', RoomsController::class);
+
+    });
 
 
 /*

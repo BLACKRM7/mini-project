@@ -13,7 +13,13 @@ class ReturnsController extends Controller
     public function index()
     {
         $returns = ReturnModel::with(['borrowing.user', 'borrowing.pc.room'])->latest()->get();
-        return view('pages.admin.returns.index', compact('returns'));
+        $returnedBorrowings = Borrowing::with(['user', 'pc.room', 'returnData'])
+            ->where('status', 'returned')
+            ->doesntHave('returnData')
+            ->latest()
+            ->get();
+
+        return view('pages.admin.returns.index', compact('returns', 'returnedBorrowings'));
     }
 
     public function show($id)

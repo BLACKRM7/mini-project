@@ -61,8 +61,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tanggal Kembali (opsional)</label>
-                                    <input type="datetime-local" name="return_date" value="{{ old('return_date') }}" class="form-control @error('return_date') is-invalid @enderror">
+                                    <label>Tanggal Kembali</label>
+                                    <input type="datetime-local" name="return_date" value="{{ old('return_date') }}" class="form-control @error('return_date') is-invalid @enderror" required>
                                     @error('return_date')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 

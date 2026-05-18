@@ -39,7 +39,7 @@
 
                                 <div class="form-group">
                                     <label>Perkiraan Tanggal Kembali</label>
-                                    <input type="datetime-local" name="return_date" value="{{ old('return_date') ? \Carbon\Carbon::parse(old('return_date'))->format('Y-m-d\\TH:i') : '' }}" class="form-control @error('return_date') is-invalid @enderror">
+                                    <input type="datetime-local" name="return_date" value="{{ old('return_date') ? \Carbon\Carbon::parse(old('return_date'))->format('Y-m-d\\TH:i') : '' }}" class="form-control @error('return_date') is-invalid @enderror" required>
                                     @error('return_date')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 

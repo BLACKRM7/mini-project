@@ -84,7 +84,7 @@
                                                 <i class="fas fa-laptop"></i> Manajemen PC
                                             </h5>
                                             <p class="card-text small">Kelola daftar PC dan ketersediaan</p>
-                                            <a href="#" class="btn btn-sm btn-success">Buka</a>
+                                            <a href="{{ route('admin.pcs.index') }}" class="btn btn-sm btn-success">Buka</a>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                                                 <i class="fas fa-handshake"></i> Manajemen Peminjaman
                                             </h5>
                                             <p class="card-text small">Monitor peminjaman dan pengembalian</p>
-                                            <a href="#" class="btn btn-sm btn-warning">Buka</a>
+                                            <a href="{{ route('admin.borrowings.index') }}" class="btn btn-sm btn-warning">Buka</a>
                                         </div>
                                     </div>
                                 </div>
@@ -106,18 +106,7 @@
                                                 <i class="fas fa-building"></i> Manajemen Ruangan
                                             </h5>
                                             <p class="card-text small">Atur ruangan dan lokasi PC</p>
-                                            <a href="#" class="btn btn-sm btn-info">Buka</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="card border-secondary">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <i class="fas fa-file-alt"></i> Laporan & Statistik
-                                            </h5>
-                                            <p class="card-text small">Lihat laporan dan analisis data</p>
-                                            <a href="#" class="btn btn-sm btn-secondary">Buka</a>
+                                            <a href="{{ route('admin.rooms.index') }}" class="btn btn-sm btn-info">Buka</a>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +117,7 @@
                                                 <i class="fas fa-history"></i> Activity Log
                                             </h5>
                                             <p class="card-text small">Lihat log aktivitas sistem</p>
-                                            <a href="#" class="btn btn-sm btn-danger">Buka</a>
+                                            <a href="{{ route('admin.returns.index') }}" class="btn btn-sm btn-danger">Buka</a>
                                         </div>
                                     </div>
                                 </div>
@@ -193,7 +182,7 @@
                                 <div class="col col-stats ms-3 ms-xl-0">
                                     <div class="numbers">
                                         <p class="state text-truncate text-secondary text-white-80">Aktif Sekarang</p>
-                                        <h3 class="counter text-white">{{ \App\Models\Borrowing::where('status', 'active')->count() }}</h3>
+                                        <h3 class="counter text-white">{{ $activeBorrowings }}</h3>
                                     </div>
                                 </div>
                                 <div class="col col-stats text-white text-end">
@@ -220,19 +209,11 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action">
+                                <a href="{{ route('admin.returns.index') }}" class="list-group-item list-group-item-action">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
                                             <p class="mb-0"><strong>Lihat Laporan</strong></p>
                                             <small class="text-muted">Laporan peminjaman & pengembalian</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex">
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0"><strong>Activity Log</strong></p>
-                                            <small class="text-muted">Riwayat aktivitas sistem</small>
                                         </div>
                                     </div>
                                 </a>

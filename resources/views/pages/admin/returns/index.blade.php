@@ -67,10 +67,27 @@
                                                 </td>
                                             </tr>
                                         @empty
-                                            <tr>
-                                                <td colspan="8" class="text-center">Belum ada data pengembalian.</td>
-                                            </tr>
+                                            @if($returnedBorrowings->isEmpty())
+                                                <tr>
+                                                    <td colspan="8" class="text-center">Belum ada data pengembalian.</td>
+                                                </tr>
+                                            @endif
                                         @endforelse
+
+                                        @foreach($returnedBorrowings as $index => $borrowing)
+                                            <tr>
+                                                <td>{{ $returns->count() + $index + 1 }}</td>
+                                                <td>{{ $borrowing->user->name ?? '-' }}</td>
+                                                <td>{{ $borrowing->pc->pc_name ?? '-' }}</td>
+                                                <td>{{ $borrowing->pc->room->room_name ?? '-' }}</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td><span class="badge badge-info">Returned</span></td>
+                                                <td>
+                                                    <a href="{{ route('admin.borrowings.show', $borrowing->id) }}" class="btn btn-sm btn-info">Detail</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

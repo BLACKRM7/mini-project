@@ -16,13 +16,14 @@ class DashboardController extends Controller
     public function index()
     {
         $totalUsers     = User::where('role', 'user')->count();
-        $totalPcs       = PC::count();
-        $availablePcs   = PC::where('status', 'available')->count();
-        $totalBorrowings = Borrowing::count();
+        $totalPcs         = PC::count();
+        $availablePcs     = PC::where('status', 'available')->count();
+        $totalBorrowings  = Borrowing::count();
         $pendingBorrowings = Borrowing::where('status', 'pending')->count();
+        $activeBorrowings = Borrowing::where('status', 'approved')->count();
 
         return view('pages.admin.dashboard', compact(
-            'totalUsers', 'totalPcs', 'availablePcs', 'totalBorrowings', 'pendingBorrowings'
+            'totalUsers', 'totalPcs', 'availablePcs', 'totalBorrowings', 'pendingBorrowings', 'activeBorrowings'
         ));
     }
 }

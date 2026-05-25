@@ -84,6 +84,7 @@ Route::prefix('admin')
 
         // Borrowings Management
         Route::resource('borrowings', BorrowingsController::class);
+        Route::patch('borrowings/{id}/status', [BorrowingsController::class, 'updateStatus'])->name('borrowings.updateStatus');
 
         // Returns Management
         Route::resource('returns', ReturnsController::class)->only(['index', 'show', 'destroy']);

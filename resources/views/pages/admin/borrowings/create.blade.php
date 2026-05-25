@@ -26,14 +26,11 @@
                                 </div>
                             @endif
 
-<<<<<<< HEAD
                             <form action="{{ route('admin.borrowings.store') }}" method="POST" enctype="multipart/form-data">
-=======
-                            <form action="{{ route('admin.borrowings.store') }}" method="POST">
->>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
                                 @csrf
+
                                 <div class="form-group">
-                                    <label>Peminjam</label>
+                                    <label>Peminjam <span class="text-danger">*</span></label>
                                     <select name="user_id" class="form-control @error('user_id') is-invalid @enderror" required>
                                         <option value="">-- Pilih User --</option>
                                         @foreach($users as $user)
@@ -46,12 +43,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>PC</label>
+                                    <label>PC <span class="text-danger">*</span></label>
                                     <select name="pc_id" class="form-control @error('pc_id') is-invalid @enderror" required>
                                         <option value="">-- Pilih PC --</option>
                                         @foreach($pcs as $pc)
                                             <option value="{{ $pc->id }}" {{ old('pc_id') == $pc->id ? 'selected' : '' }}>
-                                                {{ $pc->pc_name }} ({{ $pc->pc_code }}) - {{ $pc->room->room_name ?? '-' }}
+                                                {{ $pc->pc_name }} ({{ $pc->pc_code }}) — {{ $pc->room->room_name ?? '-' }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -59,14 +56,18 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tanggal Pinjam</label>
-                                    <input type="datetime-local" name="borrow_date" value="{{ old('borrow_date') }}" class="form-control @error('borrow_date') is-invalid @enderror" required>
+                                    <label>Tanggal Pinjam <span class="text-danger">*</span></label>
+                                    <input type="datetime-local" name="borrow_date"
+                                           value="{{ old('borrow_date') }}"
+                                           class="form-control @error('borrow_date') is-invalid @enderror" required>
                                     @error('borrow_date')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tanggal Kembali</label>
-                                    <input type="datetime-local" name="return_date" value="{{ old('return_date') }}" class="form-control @error('return_date') is-invalid @enderror" required>
+                                    <label>Tanggal Kembali <small class="text-muted">(opsional)</small></label>
+                                    <input type="datetime-local" name="return_date"
+                                           value="{{ old('return_date') }}"
+                                           class="form-control @error('return_date') is-invalid @enderror">
                                     @error('return_date')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 
@@ -77,15 +78,21 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Foto Identitas</label>
-                                    <input type="file" name="identity_photo" accept="image/*" class="form-control @error('identity_photo') is-invalid @enderror" required>
+                                    <label>Foto Identitas <span class="text-danger">*</span></label>
+                                    <input type="file" name="identity_photo" id="identity_photo_create"
+                                           accept="image/*"
+                                           class="form-control @error('identity_photo') is-invalid @enderror" required>
+                                    <small class="form-text text-muted">Format JPG/PNG, maks 2MB.</small>
                                     @error('identity_photo')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    <div id="preview_create" class="mt-2" style="display:none;">
+                                        <img id="preview_img_create" src="" alt="Preview" class="img-thumbnail" style="max-width: 220px;">
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Status</label>
+                                    <label>Status <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control @error('status') is-invalid @enderror" required>
-                                        <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="pending"  {{ old('status','pending') == 'pending'  ? 'selected' : '' }}>Pending</option>
                                         <option value="approved" {{ old('status') == 'approved' ? 'selected' : '' }}>Approved</option>
                                         <option value="returned" {{ old('status') == 'returned' ? 'selected' : '' }}>Returned</option>
                                         <option value="rejected" {{ old('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
@@ -102,4 +109,21 @@
         </div>
     </section>
 </div>
+
+<script>
+document.getElementById('identity_photo_create').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('preview_create');
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('preview_img_create').src = ev.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.style.display = 'none';
+    }
+});
+</script>
 @endsection

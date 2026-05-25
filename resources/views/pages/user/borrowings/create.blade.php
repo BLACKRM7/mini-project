@@ -23,50 +23,60 @@
                             @endif
 
                             <div class="alert alert-info mb-3">
-                                <strong>Info PC:</strong> {{ $pc->pc_name }} | {{ $pc->processor }} | RAM {{ $pc->ram }} | {{ $pc->storage }}<br>
-                                <strong>Ruangan:</strong> {{ $pc->room->room_name ?? '-' }} - {{ $pc->room->location ?? '-' }}
+                                <strong>Info PC:</strong>
+                                {{ $pc->pc_name }} | {{ $pc->processor ?? '-' }} | RAM {{ $pc->ram ?? '-' }} | {{ $pc->storage ?? '-' }}<br>
+                                <strong>Ruangan:</strong> {{ $pc->room->room_name ?? '-' }} — {{ $pc->room->location ?? '-' }}
                             </div>
 
-<<<<<<< HEAD
                             <form action="{{ route('user.borrowings.store') }}" method="POST" enctype="multipart/form-data">
-=======
-                            <form action="{{ route('user.borrowings.store') }}" method="POST">
->>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
                                 @csrf
                                 <input type="hidden" name="pc_id" value="{{ $pc->id }}">
 
                                 <div class="form-group">
                                     <label>Tanggal Pinjam <span class="text-danger">*</span></label>
-                                    <input type="datetime-local" name="borrow_date" value="{{ old('borrow_date') ? \Carbon\Carbon::parse(old('borrow_date'))->format('Y-m-d\\TH:i') : '' }}" class="form-control @error('borrow_date') is-invalid @enderror" required>
+                                    <input type="datetime-local" name="borrow_date"
+                                           value="{{ old('borrow_date') ? \Carbon\Carbon::parse(old('borrow_date'))->format('Y-m-d\TH:i') : '' }}"
+                                           class="form-control @error('borrow_date') is-invalid @enderror" required>
                                     @error('borrow_date')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Perkiraan Tanggal Kembali</label>
-<<<<<<< HEAD
-                                    <input type="datetime-local" name="return_date" value="{{ old('return_date') ? \Carbon\Carbon::parse(old('return_date'))->format('Y-m-d\\TH:i') : '' }}" class="form-control @error('return_date') is-invalid @enderror">
-=======
-                                    <input type="datetime-local" name="return_date" value="{{ old('return_date') ? \Carbon\Carbon::parse(old('return_date'))->format('Y-m-d\\TH:i') : '' }}" class="form-control @error('return_date') is-invalid @enderror" required>
->>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
+                                    <label>Perkiraan Tanggal Kembali <small class="text-muted">(opsional)</small></label>
+                                    <input type="datetime-local" name="return_date"
+                                           value="{{ old('return_date') ? \Carbon\Carbon::parse(old('return_date'))->format('Y-m-d\TH:i') : '' }}"
+                                           class="form-control @error('return_date') is-invalid @enderror">
                                     @error('return_date')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label>Tujuan Peminjaman</label>
-                                    <textarea name="purpose" class="form-control @error('purpose') is-invalid @enderror" rows="3" placeholder="Jelaskan tujuan peminjaman...">{{ old('purpose') }}</textarea>
+                                    <textarea name="purpose"
+                                              class="form-control @error('purpose') is-invalid @enderror"
+                                              rows="3"
+                                              placeholder="Jelaskan tujuan peminjaman...">{{ old('purpose') }}</textarea>
                                     @error('purpose')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 
-<<<<<<< HEAD
                                 <div class="form-group">
                                     <label>Foto Identitas <span class="text-danger">*</span></label>
-                                    <input type="file" name="identity_photo" accept="image/*" class="form-control @error('identity_photo') is-invalid @enderror" required>
+                                    <div class="alert alert-warning py-2 px-3 mb-2">
+                                        <i class="fas fa-info-circle"></i>
+                                        Upload foto KTP, kartu pelajar, atau identitas lain yang valid. Format JPG/PNG, maks 2MB.
+                                    </div>
+                                    <input type="file" name="identity_photo" id="identity_photo_user"
+                                           accept="image/*"
+                                           class="form-control @error('identity_photo') is-invalid @enderror" required>
                                     @error('identity_photo')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    <div id="preview_user" class="mt-3" style="display:none;">
+                                        <p class="text-muted mb-1">Preview:</p>
+                                        <img id="preview_img_user" src="" alt="Preview"
+                                             class="img-thumbnail" style="max-width:250px;">
+                                    </div>
                                 </div>
 
-=======
->>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
-                                <button type="submit" class="btn btn-primary">Kirim Permintaan</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Kirim Permintaan
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -75,4 +85,21 @@
         </div>
     </section>
 </div>
+
+<script>
+document.getElementById('identity_photo_user').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('preview_user');
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('preview_img_user').src = ev.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.style.display = 'none';
+    }
+});
+</script>
 @endsection

@@ -27,7 +27,6 @@ class BorrowingsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-<<<<<<< HEAD
             'user_id'       => 'required|exists:users,id',
             'pc_id'         => 'required|exists:pcs,id',
             'borrow_date'   => 'required|date',
@@ -50,20 +49,6 @@ class BorrowingsController extends Controller
             'identity_photo'=> $identityPhotoPath,
             'status'        => $request->status,
         ]);
-=======
-            'user_id'     => 'required|exists:users,id',
-            'pc_id'       => 'required|exists:pcs,id',
-            'borrow_date' => 'required|date',
-            'return_date' => 'nullable|date|after_or_equal:borrow_date',
-            'purpose'     => 'nullable|string',
-            'status'      => 'required|in:pending,approved,returned,rejected',
-        ]);
-
-        Borrowing::create($request->only([
-            'user_id', 'pc_id', 'borrow_date', 'return_date', 'purpose', 'status'
-        ]));
-
->>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
         // Mark PC as unavailable if approved
         if ($request->status === 'approved') {
             PC::findOrFail($request->pc_id)->update(['status' => 'unavailable']);

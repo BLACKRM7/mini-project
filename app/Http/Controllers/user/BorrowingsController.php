@@ -32,7 +32,6 @@ class BorrowingsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-<<<<<<< HEAD
             'pc_id'         => 'required|exists:pcs,id',
             'borrow_date'   => 'required|date',
             'return_date'   => 'nullable|date|after_or_equal:borrow_date',
@@ -52,21 +51,6 @@ class BorrowingsController extends Controller
             'purpose'       => $request->purpose,
             'identity_photo'=> $identityPhotoPath,
             'status'        => 'pending',
-=======
-            'pc_id'       => 'required|exists:pcs,id',
-            'borrow_date' => 'required|date',
-            'return_date' => 'nullable|date|after_or_equal:borrow_date',
-            'purpose'     => 'nullable|string|max:500',
-        ]);
-
-        Borrowing::create([
-            'user_id'     => Auth::id(),
-            'pc_id'       => $request->pc_id,
-            'borrow_date' => $request->borrow_date,
-            'return_date' => $request->return_date,
-            'purpose'     => $request->purpose,
-            'status'      => 'pending',
->>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
         ]);
 
         return redirect()->route('user.borrowings.index')->with('success', 'Permintaan peminjaman berhasil dikirim. Menunggu persetujuan admin.');

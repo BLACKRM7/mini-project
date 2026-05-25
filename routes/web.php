@@ -30,7 +30,11 @@ Route::get('/', function () {
         }
         return redirect()->route('user.dashboard');
     }
+<<<<<<< HEAD
     return view('pages.auth.login');
+=======
+    return view('welcome');
+>>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
 })->name('home');
 
 

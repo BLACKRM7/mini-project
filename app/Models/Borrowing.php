@@ -16,7 +16,10 @@ class Borrowing extends Model
         'return_date',
         'status',
         'purpose',
+<<<<<<< HEAD
         'identity_photo',
+=======
+>>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
     ];
 
     // Relasi ke user

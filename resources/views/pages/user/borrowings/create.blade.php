@@ -27,7 +27,11 @@
                                 <strong>Ruangan:</strong> {{ $pc->room->room_name ?? '-' }} - {{ $pc->room->location ?? '-' }}
                             </div>
 
+<<<<<<< HEAD
                             <form action="{{ route('user.borrowings.store') }}" method="POST" enctype="multipart/form-data">
+=======
+                            <form action="{{ route('user.borrowings.store') }}" method="POST">
+>>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
                                 @csrf
                                 <input type="hidden" name="pc_id" value="{{ $pc->id }}">
 
@@ -39,7 +43,11 @@
 
                                 <div class="form-group">
                                     <label>Perkiraan Tanggal Kembali</label>
+<<<<<<< HEAD
                                     <input type="datetime-local" name="return_date" value="{{ old('return_date') ? \Carbon\Carbon::parse(old('return_date'))->format('Y-m-d\\TH:i') : '' }}" class="form-control @error('return_date') is-invalid @enderror">
+=======
+                                    <input type="datetime-local" name="return_date" value="{{ old('return_date') ? \Carbon\Carbon::parse(old('return_date'))->format('Y-m-d\\TH:i') : '' }}" class="form-control @error('return_date') is-invalid @enderror" required>
+>>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
                                     @error('return_date')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 
@@ -49,12 +57,15 @@
                                     @error('purpose')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 
+<<<<<<< HEAD
                                 <div class="form-group">
                                     <label>Foto Identitas <span class="text-danger">*</span></label>
                                     <input type="file" name="identity_photo" accept="image/*" class="form-control @error('identity_photo') is-invalid @enderror" required>
                                     @error('identity_photo')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 
+=======
+>>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
                                 <button type="submit" class="btn btn-primary">Kirim Permintaan</button>
                             </form>
                         </div>

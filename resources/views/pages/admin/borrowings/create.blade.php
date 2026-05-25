@@ -26,7 +26,11 @@
                                 </div>
                             @endif
 
+<<<<<<< HEAD
                             <form action="{{ route('admin.borrowings.store') }}" method="POST" enctype="multipart/form-data">
+=======
+                            <form action="{{ route('admin.borrowings.store') }}" method="POST">
+>>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
                                 @csrf
                                 <div class="form-group">
                                     <label>Peminjam</label>

@@ -31,7 +31,10 @@
                                             <th>Waktu Pinjam</th>
                                             <th>Waktu Kembali</th>
                                             <th>Status</th>
+<<<<<<< HEAD
                                             <th>Foto Identitas</th>
+=======
+>>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -46,6 +49,7 @@
                                                 <td>{{ $borrowing->borrow_date }}</td>
                                                 <td>{{ $borrowing->return_date ?? '-' }}</td>
                                                 <td>
+<<<<<<< HEAD
                                                     <form action="{{ route('admin.borrowings.update', $borrowing->id) }}" method="POST">
                                                         @csrf
                                                         @method('PATCH')
@@ -70,6 +74,17 @@
                                                     @else
                                                         -
                                                     @endif
+=======
+                                                    @php
+                                                        $badge = [
+                                                            'pending'  => 'warning',
+                                                            'approved' => 'success',
+                                                            'returned' => 'info',
+                                                            'rejected' => 'danger',
+                                                        ][$borrowing->status] ?? 'secondary';
+                                                    @endphp
+                                                    <span class="badge badge-{{ $badge }}">{{ ucfirst($borrowing->status) }}</span>
+>>>>>>> 3c6b2094325379f20b2d886427a1bf16db81d900
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('admin.borrowings.show', $borrowing->id) }}" class="btn btn-sm btn-info">Detail</a>

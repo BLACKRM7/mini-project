@@ -13,7 +13,7 @@ class BorrowingsController extends Controller
 {
     public function index()
     {
-        $borrowings = Borrowing::with(['user', 'pc.room'])->latest()->get();
+        $borrowings = Borrowing::with(['user', 'pc.room'])->latest()->paginate(5);
         return view('pages.admin.borrowings.index', compact('borrowings'));
     }
 

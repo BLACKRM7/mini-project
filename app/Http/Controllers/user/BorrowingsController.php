@@ -16,7 +16,7 @@ class BorrowingsController extends Controller
         $borrowings = Borrowing::where('user_id', Auth::id())
             ->with(['pc.room', 'returnData'])
             ->latest()
-            ->get();
+            ->paginate(5);
         return view('pages.user.borrowings.index', compact('borrowings'));
     }
 
